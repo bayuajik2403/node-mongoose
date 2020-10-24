@@ -53,14 +53,43 @@ app.get('/users',(req,res)=>{
 
 // patch or put
 
-app.patch('/users/:id',(req,res)=>{
+// app.patch('/users/:id',(req,res)=>{
+//     var id = req.params.id;
+//     var firstName = req.body.firstName;
+
+//     User.findByIdAndUpdate({_id:id}, {$set: {firstName: firstName}}, {new: true})
+//         .then(savedUser=>{
+//             res.send('USER SAVED BY PATCH')
+//         })
+// });
+
+app.put('/users/:id',(req,res)=>{
     var id = req.params.id;
     var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var isActive = req.body.isActive;
 
-    User.findByIdAndUpdate({_id:id}, {$set: {firstName: firstName}}, {new: true})
+    User.findByIdAndUpdate({_id:id}, {$set: {firstName: firstName, lastName: lastName}}, {new: true})
         .then(savedUser=>{
             res.send('USER SAVED BY PATCH')
         })
+    
+});
+
+//delete
+// app.delete('/users/:id',(req,res)=>{
+//     User.findOne({_id: req.params.id}).then(user=>{
+//         user.remove().then(userRemoved=>{
+//             res.send('user remove '+userRemoved)
+//         });
+
+//     });
+// });
+
+app.delete('/users/:id',(req,res)=>{
+    User.findByIdAndRemove(req.params.id).then(userRemoved=>{
+        res.send(`User ${userRemoved.firstName} removed.`);
+    })
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!!!`))
