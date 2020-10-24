@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User', {
-    name: {
+    firstName: {
         type: String,
         required: true,
         minlength: 1,
@@ -21,4 +21,4 @@ const User = mongoose.model('User', {
 
 });
 
-module.export = {User};
+module.exports = User;

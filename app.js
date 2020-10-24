@@ -8,3 +8,13 @@ mongoose.connection
         console.log(`couldnt connect `, err)
     });
 
+const newUser = new User({
+    firstName : 'Bayu Aji',
+    lastName : 'Kurniawan',
+    isActive : 1
+});
+
+newUser.save(function(err,dataSaved){
+    if(err) return err;
+    console.log(`data is saved:`+dataSaved);
+});
