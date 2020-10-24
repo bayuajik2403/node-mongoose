@@ -51,4 +51,16 @@ app.get('/users',(req,res)=>{
     })
 })
 
+// patch or put
+
+app.patch('/users/:id',(req,res)=>{
+    var id = req.params.id;
+    var firstName = req.body.firstName;
+
+    User.findByIdAndUpdate({_id:id}, {$set: {firstName: firstName}}, {new: true})
+        .then(savedUser=>{
+            res.send('USER SAVED BY PATCH')
+        })
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!!!`))
